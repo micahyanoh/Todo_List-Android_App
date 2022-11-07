@@ -1,0 +1,76 @@
+<TodoCard>
+    elevation:10
+    md_bg_color: [1,1,1,1]
+    radius:[8]
+    MDFloatLayout:
+        id:bar 
+        size_hint:.01,.9
+        pos_hint: {'center_x': 0.05,'center_y': 0.5} 
+        md_bg_color:[1,175/255,23/255,1]  
+    MDLabel:
+        text: root.title
+        markup:True
+        font_name: 'Poppins-SemiBold.ttf'
+        font_size:sp(20)
+        size_hint_x: .8
+        pos_hint: {'center_x': 0.46,'center_y': 0.8} 
+    MDCheckbox:
+        size_hint: None, None
+        size: '48dp','48dp'
+        unselected_color: [1,175/255,23/255,1]  
+        selected_color:[0,179/255,0,1]
+        pos_hint: {'center_x': 0.95,'center_y': 0.8}
+        on_active: app.on_complete(*args,description,bar)
+    MDLabel:
+        id:description
+        text: root.description
+        font_name: 'Poppins-Regular.ttf'
+        markup:True
+        size_hint_x:.9
+        line_height:.8
+        pos_hint: {'center_x': 0.51,'center_y': 0.4}
+
+
+MDScreen:
+    date:date
+    todo_list:todo_list
+    name:'main'
+    MDFloatLayout:
+        md_bg_color:[1,1,1,1]
+        MDLabel:
+            text:'My Tasks'
+            pos_hint: {'center_x': 0.56,'center_y': 0.95}
+            font_name: 'Poppins-Bold.ttf'
+            font_size:sp(35)
+        MDLabel:
+            id:date 
+            text:
+            pos_hint: {'center_x': 0.565,'center_y': 0.89}
+            font_name: 'Lcd.ttf'
+            font_size:sp(22)
+            color: 1 , 0 , 1 , 1
+        MDIconButton:
+            icon: 'plus'
+            pos_hint: {'center_x': 0.89,'center_y': 0.925}
+            user_font_size:sp(30)
+            md_bg_color:[1,175/255,23/255,1] 
+            theme_text_color:'Custom'
+            text_color:[1,1,1,1]
+            on_release:
+                root.manager.transition.direction='left'
+                root.manager.current='add_todo'
+        ScrollView:
+            do_scroll_y:True 
+            do_scroll_x:False 
+            size_hint_y:.85
+            pos_hint: {'center_x': 0.5,'y': 0}
+            bar_width:0
+            GridLayout:
+                id: todo_list
+                cols:1
+                height:self.minimum_height
+                row_default_height:80
+                size_hint_y:None
+                paddinng:15,10
+                spacing:15,10
+
